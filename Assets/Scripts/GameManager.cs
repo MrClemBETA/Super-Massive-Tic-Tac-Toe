@@ -17,11 +17,6 @@ public class GameManager : MonoBehaviour
     private Player currentPlayer;
     private string currentBoard;
 
-    // Colors
-    private Color lastPlayed = new Color(1f, 0f, 0f, .5f);
-    private Color nextPlayed = new Color(0f, 1f, 0f, .5f);
-    private Color blank = new Color(0f, 0f, 0f, 0f);
-
     void Awake()
     {
         if (instance == null)
