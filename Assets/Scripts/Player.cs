@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Sprite Letter { get; private set; }
+    public Sprite LetterSprite { get; private set; }
     public string Name { get; private set; }
-
-    public Player(Sprite s, string name)
+    public string Letter { get; private set; }
+    public Player(string letter, string name)
     {
         Name = name;
-        Letter = s;
+        Letter = letter;
+        LetterSprite = letter == "X" ? GameManager.instance.X : GameManager.instance.O;
     }
 
     // Start is called before the first frame update

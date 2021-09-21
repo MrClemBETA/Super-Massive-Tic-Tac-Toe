@@ -1698,11 +1698,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Top Left
       objectReference: {fileID: 0}
-    - target: {fileID: 225437013127002704, guid: 20b9753cb2c122d4f91fedd5695c0a42,
-        type: 3}
-      propertyPath: m_TagString
-      value: Top Left
-      objectReference: {fileID: 0}
     - target: {fileID: 225437013127002705, guid: 20b9753cb2c122d4f91fedd5695c0a42,
         type: 3}
       propertyPath: m_LocalPosition.x

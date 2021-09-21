@@ -11,10 +11,10 @@ public class GameManager : MonoBehaviour
     public Sprite O;
 
     public Sprite CurrentSprite { get; private set; }
+    public Player CurrentPlayer { get; private set; }
 
     private Player player1;
     private Player player2;
-    private Player currentPlayer;
     private string currentBoard;
 
     void Awake()
@@ -28,10 +28,10 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player1 = new Player(X, "X");
-        player2 = new Player(O, "O");
-        currentPlayer = player1;
-        CurrentSprite = player1.Letter;
+        player1 = new Player("X", "Clem");
+        player2 = new Player("O", "Computer");
+        CurrentPlayer = player1;
+        CurrentSprite = player1.LetterSprite;
     }
 
     // Update is called once per frame
@@ -42,8 +42,8 @@ public class GameManager : MonoBehaviour
 
     public void ChangePlayer(string boardTag)
     {
-        currentPlayer = currentPlayer.Name == player1.Name ? player2 : player1;
-        CurrentSprite = currentPlayer.Letter;
+        CurrentPlayer = CurrentPlayer.Name == player1.Name ? player2 : player1;
+        CurrentSprite = CurrentPlayer.LetterSprite;
         UpdateAvailableBoards(boardTag);
     }
 
