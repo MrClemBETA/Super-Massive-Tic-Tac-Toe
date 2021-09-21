@@ -20,7 +20,6 @@ public class Tile : MonoBehaviour
 
     public void UpdateSprite()
     {
-        Debug.Log("Button Pressed");
         Letter = GameManager.instance.CurrentPlayer.Letter;
         Image img = GetComponent<Image>();
         GetComponent<Button>().enabled = false;
