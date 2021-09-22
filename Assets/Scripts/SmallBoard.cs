@@ -8,9 +8,10 @@ public class SmallBoard : MonoBehaviour
     public GameObject[] board;
     public GameObject winnerImage;
 
+    public string Winner { get; private set; }
+
     private Color nextPlayed = new Color(0f, 1f, 0f, .5f);
     private Color blank = new Color(0f, 0f, 0f, 0f);
-    private string winner = null;
 
     // Start is called before the first frame update
     void Start()
@@ -68,66 +69,25 @@ public class SmallBoard : MonoBehaviour
 
     public void DetermineWinner()
     {
-        // Look at rows
-        for (int i = 0; i < 3; i++) {
-            Tile[] row = { board[i*3].GetComponent<Tile>(), board[i*3 + 1].GetComponent<Tile>(), board[i*3 + 2].GetComponent<Tile>() };
-            if (ThreeInARow(row))
-            {
-                SetWinner(row[i*3].Letter);
-                return;
-            }
+        string[] letterBoard = new string[9];
+
+        for(int i = 0; i < board.Length; i++)
+        {
+            letterBoard[i] = board[i].GetComponent<Tile>().Letter;
         }
 
-        // Look at columns
-        for (int i = 0; i < 3; i++)
-        {
-            Tile[] col = { board[i].GetComponent<Tile>(), board[3 + i].GetComponent<Tile>(), board[6 + i].GetComponent<Tile>() };
-            if (ThreeInARow(col))
-            {
-                SetWinner(col[i * 3].Letter);
-                return;
-            }
-        }
+        string winner = Utility.DetermineWinner(letterBoard);
 
-        // Diagonals
-        Tile[] diag = { board[0].GetComponent<Tile>(), board[4].GetComponent<Tile>(), board[8].GetComponent<Tile>() };
-        if (ThreeInARow(diag))
-        {
-            SetWinner(diag[0].Letter);
-            return;
-        }
-
-        Tile[] otherDiag = { board[2].GetComponent<Tile>(), board[4].GetComponent<Tile>(), board[6].GetComponent<Tile>() };
-        if (ThreeInARow(otherDiag))
-        {
-            SetWinner(otherDiag[0].Letter);
-            return;
-        }
-    }
-
-    public bool ThreeInARow(Tile[] tiles)
-    {
-        string letter = tiles[0].Letter;
-
-        if(letter != null)
-        {
-            if (letter == tiles[1].Letter && letter == tiles[2].Letter)
-                return true;
-            else
-                return false;
-        }
-        else
-        {
-            return false;
-        }
+        if (winner != null)
+            SetWinner(winner);
     }
 
     private void SetWinner(string winner)
     {
         winnerImage.GetComponent<Image>().color = new Color(0f, 0f, 0f, .5f);
-        if (this.winner == null)
+        if (Winner == null)
         {
-            this.winner = winner;
+            Winner = winner;
             if (winner == "X")
             {
                 winnerImage.GetComponent<Image>().sprite = GameManager.instance.X;
@@ -137,5 +97,6 @@ public class SmallBoard : MonoBehaviour
                 winnerImage.GetComponent<Image>().sprite = GameManager.instance.O;
             }
         }
+        LargeBoard.instance.DetermineWinner();
     }
 }
