@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
     {
         CurrentPlayer = CurrentPlayer.Name == player1.Name ? player2 : player1;
         CurrentSprite = CurrentPlayer.LetterSprite;
+        DisplayManager.instance.UpdatePlayerTurn(CurrentPlayer.Letter);
         UpdateAvailableBoards(boardTag);
     }
 
